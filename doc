@@ -1,0 +1,200 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "ang",
+        "version": "1.0.0",
+        "description": "desc",
+        "license": {
+            "name": "MIT License",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "paths": {
+        "/vehicles": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Vehicle"
+                                    }
+                                },
+                                "examples": {
+                                    "Vehicles list example": {
+                                        "value": [
+                                            {
+                                                "id": "12",
+                                                "mark": "bmw"
+                                            },
+                                            {
+                                                "id": "13",
+                                                "mark": "audi"
+                                            },
+                                            {
+                                                "id": "14",
+                                                "mark": "volvo"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "GET all vehicles response"
+                    }
+                },
+                "summary": "GET all vehicles",
+                "description": "Description : GET all vehicles"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Vehicle"
+                            },
+                            "examples": {
+                                "vehicle example": {
+                                    "value": {
+                                        "id": "44",
+                                        "mark": "opel",
+                                        "age": "3"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "POST response": {
+                                        "value": "Vehicle added"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Post new vehicle response"
+                    }
+                },
+                "summary": "Add new vehicle",
+                "description": "Description : add new vehicle "
+            }
+        },
+        "/vehicles/{vehicleId}": {
+            "summary": "Path used to manage a single Vehicle.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `Vehicle`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "parameters": [
+                    {
+                        "name": "vehicleId",
+                        "description": "A unique identifier for a `Vehicle`.\nValue : `88`.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Vehicle"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `Vehicle`."
+                    }
+                },
+                "operationId": "getVehicle",
+                "summary": "Get a Vehicle",
+                "description": "Gets the details of a single instance of a `Vehicle`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `Vehicle` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Vehicle"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "PUT response": {
+                                        "value": "Vehicle updated !"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updateVehicle",
+                "summary": "Update a Vehicle",
+                "description": "Updates an existing `Vehicle`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deleteVehicle",
+                "summary": "Delete a Vehicle",
+                "description": "Deletes an existing `Vehicle`."
+            },
+            "parameters": [
+                {
+                    "name": "vehicleId",
+                    "description": "A unique identifier for a `Vehicle`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "Vehicle": {
+                "title": "Root Type for Vehicle",
+                "description": "Vehicle Model",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "mark": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": "88",
+                    "mark": "volvo",
+                    "age": "5"
+                }
+            }
+        }
+    }
+}
